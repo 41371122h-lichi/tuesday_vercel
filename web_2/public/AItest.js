@@ -1,11 +1,7 @@
 // 1. 移除所有的 import，改用全域變數 (CDN 模式)
 const { useState, useEffect, useRef } = React;
 
-// ==========================================
-// ⚠️ 後端伺服器網址
-// ==========================================
-// 使用相對路徑 (空字串)，瀏覽器會自動連線到同一個網域下的 /api
-// 這樣無論在本機還是 Vercel 都能正常運作 (前提是 server.js 也一起跑起來)
+// 使用相對路徑，自動連線到同網域下的後端
 const BACKEND_URL = ''; 
 
 function AIChatAssistant() {
@@ -28,18 +24,18 @@ function AIChatAssistant() {
         const userMessageText = input;
         const userMessage = { role: 'user', text: userMessageText };
         
-        // 1. 先把使用者的訊息顯示在畫面上
+        // 1. 更新畫面顯示使用者的訊息
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
 
-        // 2. 準備要傳給後端的對話紀錄
+        // 2. 準備對話歷史
         const contents = [...messages, userMessage].map(msg => ({
             role: msg.role === 'user' ? 'user' : 'model', 
             parts: [{ text: msg.text }]
         }));
         
-        // 3. 直接發送給 AI 聊天 API
+        // 3. 直接發送給 AI
         try {
             const response = await axios.post(`${BACKEND_URL}/api/ai/chat`, { contents });
             const aiResponse = { role: 'model', text: response.data.ai_response };

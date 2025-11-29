@@ -3,18 +3,22 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { GoogleGenAI } = require("@google/genai");
 
+// 確保有載入環境變數
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 設定 API Key
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY; 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 app.use(bodyParser.json());
-// 允許所有來源跨域請求
 app.use(cors()); 
 
+// ==========================================
+// 純 AI 聊天路由
+// ==========================================
 app.post('/api/ai/chat', async (req, res) => {
     const { contents } = req.body; 
 
@@ -27,11 +31,10 @@ app.post('/api/ai/chat', async (req, res) => {
     
     // 簡單的系統提示詞
     const systemInstructionText = `
-    你是一位專業、樂於助人且友善的 AI 助手。
+    你是一位專業、樂於助人且友善的 AI 助手，名叫 Gemini。
     今天的日期是 ${formattedDate}。請用友善的語氣回答使用者的問題。
     `;
 
-    // 強制注入日期資訊
     const dateInjectionMessage = {
         role: 'user', 
         parts: [{ text: `【絕對日期設定】：今天實際的日期是 ${formattedDate}。` }]
@@ -56,6 +59,9 @@ app.post('/api/ai/chat', async (req, res) => {
     }
 });
 
+// ==========================================
+// Vercel Serverless 設定
+// ==========================================
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
