@@ -59,9 +59,6 @@ app.post('/api/ai/chat', async (req, res) => {
     }
 });
 
-// ==========================================
-// Vercel Serverless 設定
-// ==========================================
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
