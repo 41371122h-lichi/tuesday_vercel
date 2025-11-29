@@ -37,6 +37,7 @@ function AIChatAssistant() {
         
         // 3. 直接發送給 AI
         try {
+            // 只呼叫單純的聊天路由
             const response = await axios.post(`${BACKEND_URL}/api/ai/chat`, { contents });
             const aiResponse = { role: 'model', text: response.data.ai_response };
             setMessages(prev => [...prev, aiResponse]);
