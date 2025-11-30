@@ -7,25 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 淺紫色宮廷風配色變數 (已更新) --- */
         :root {
-            --bg-color: #fcfaff;        /* 極淡的薰衣草白背景 */
-            --sidebar-bg: #957dad;      /* 主色：優雅的淺紫色 (Wisteria) */
-            --sidebar-hover: #b39ddb;   /* 側邊欄按鈕懸停色 */
-            --text-main: #5e5066;       /* 深紫灰色文字 (閱讀舒適) */
-            --text-light: #ffffff;      /* 純白文字 (側邊欄用) */
-            --accent-gold: #e0c38c;     /* 香檳金 (強調色，比原本的黃金更柔和) */
-            --card-bg: #ffffff;         /* 卡片白底 */
+            --bg-color: #fcfaff; 
+            --sidebar-bg: #957dad; 
+            --sidebar-hover: #b39ddb; 
+            --text-main: #5e5066;  
+            --text-light: #ffffff;  
+            --accent-gold: #e0c38c; 
+            --card-bg: #ffffff;        
         }
 
         /* --- 全域樣式 --- */
         html {
-            scroll-behavior: smooth; /* 點擊連結時平滑滾動 */
+            scroll-behavior: smooth; 
         }
 
         body {
             margin: 0;
-            font-family: 'Playfair Display', 'Noto Serif TC', serif; /* 襯線體 */
+            font-family: 'Playfair Display', 'Noto Serif TC', serif; 
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
@@ -46,7 +45,7 @@
             left: 0;
             box-sizing: border-box;
             z-index: 100;
-            box-shadow: 4px 0 20px rgba(149, 125, 173, 0.25); /* 紫色暈影 */
+            box-shadow: 4px 0 20px rgba(149, 125, 173, 0.25); 
         }
 
         .sidebar img {
@@ -54,7 +53,7 @@
             height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.8); /* 改成半透明白邊框，更顯溫柔 */
+            border: 4px solid rgba(255, 255, 255, 0.8); 
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
@@ -72,7 +71,7 @@
             margin: 0 0 20px 0;
             font-size: 1.1em;
             text-align: center;
-            color: var(--accent-gold); /* 香檳金副標題 */
+            color: var(--accent-gold); 
             font-style: italic;
         }
 
@@ -81,7 +80,6 @@
             opacity: 0.95;
         }
 
-        /* --- 側邊欄導航選單 --- */
         .sidebar-nav {
             margin-top: 30px;
             width: 100%;
@@ -96,14 +94,14 @@
             color: var(--text-light);
             font-size: 1.1em;
             padding: 10px 25px;
-            border-radius: 50px; /* 圓角按鈕 */
+            border-radius: 50px;
             transition: all 0.3s ease;
             letter-spacing: 1px;
             border: 1px solid transparent;
         }
 
         .sidebar-nav a:hover {
-            background-color: rgba(255, 255, 255, 0.2); /* 半透明白色背景 */
+            background-color: rgba(255, 255, 255, 0.2);
             color: #fff;
             transform: translateY(-2px);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -153,9 +151,8 @@
             padding: 40px;
             margin-bottom: 50px;
             border-radius: 16px;
-            /* 調整陰影為淡淡的紫色 */
             box-shadow: 0 10px 30px rgba(149, 125, 173, 0.1); 
-            border: 1px solid rgba(224, 195, 140, 0.3); /* 淡香檳金邊框 */
+            border: 1px solid rgba(224, 195, 140, 0.3);
             scroll-margin-top: 50px; 
         }
 
@@ -164,7 +161,7 @@
             padding-bottom: 15px;
             margin-bottom: 30px;
             font-size: 2em;
-            color: var(--sidebar-bg); /* 標題跟隨主色 */
+            color: var(--sidebar-bg); 
             font-family: 'Playfair Display', serif;
             letter-spacing: 1px;
         }
@@ -179,7 +176,7 @@
 
         ul li {
             list-style-type: square;
-            color: var(--sidebar-bg); /* 列表符號改為淺紫色 */
+            color: var(--sidebar-bg); 
         }
         
         ul li span {
@@ -194,7 +191,7 @@
         }
         
         a:hover {
-            color: #7e57c2; /* 深一點的紫色 */
+            color: #7e57c2; 
             text-decoration: underline;
         }
 
@@ -268,11 +265,11 @@
 
         .skill-value {
             font-weight: bold;
-            color: #bcaaa4; /* 暖灰色數值 */
+            color: #bcaaa4;
         }
 
         .skill-bar {
-            background-color: #f3eff5; /* 淺紫灰底 */
+            background-color: #f3eff5; 
             border-radius: 20px;
             overflow: hidden;
             height: 12px;
@@ -280,7 +277,7 @@
 
         .skill-bar-fill {
             height: 100%;
-            background-color: var(--sidebar-bg); /* 淺紫色進度條 */
+            background-color: var(--sidebar-bg); 
             width: 0%;
             border-radius: 20px;
             transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -315,8 +312,7 @@
     <div class="sidebar">
         <img src="images/IMG_5884.jpg" alt="樂琦大頭照">
         <h1>施樂琦</h1>
-        <h2>Lechi.S</h2>
-
+        
         <p>
         I'm a <span class="typed"></span>
         </p>
@@ -326,7 +322,6 @@
             <a href="#skills">SKILLS</a>
             <a href="#concert">CONCERT</a>
             <a href="#travel">TRAVEL</a>
-            <a href="#webtoon">WEBTOON</a>
         </nav>
 
         <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
@@ -516,21 +511,9 @@
                 </div>
             </ul>
         </section>
-
-        <section id="webtoon">
-            <h3>WEBTOON | 漫畫推薦</h3>
-            <p class="concert-text">近期推薦作品❤</p>
-            <ul>
-                <li><span>愛上帝國第一惡女！</span></li>
-                <div class="image-container">
-                    <img src="images/愛上帝國第一惡女.jpeg" alt="愛上帝國第一惡女">
-                </div>
-            </ul>
-        </section>
     </div>
 
     <script>
-        // 設定技能條動畫
         document.addEventListener("DOMContentLoaded", function() {
             const skillSection = document.querySelector('#skills');
             const progressBars = document.querySelectorAll('.skill-bar-fill');
