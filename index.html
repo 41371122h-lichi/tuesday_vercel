@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人網頁_樂琦 | Lechi.S</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfaff; 
+            --sidebar-bg: #957dad; 
+            --sidebar-hover: #b39ddb; 
+            --text-main: #5e5066;  
+            --text-light: #ffffff;  
+            --accent-gold: #e0c38c; 
+            --card-bg: #ffffff;        
+        }
+
+        /* --- 全域樣式 --- */
+        html {
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', 'Noto Serif TC', serif; 
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+        }
+
+        /* --- 側邊欄 (固定不捲動) --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 100;
+            box-shadow: 4px 0 20px rgba(149, 125, 173, 0.25); 
+        }
+
+        .sidebar img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.8); 
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .sidebar h1 {
+            margin: 5px 0;
+            font-size: 2em;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .sidebar h2 {
+            margin: 0 0 20px 0;
+            font-size: 1.1em;
+            text-align: center;
+            color: var(--accent-gold); 
+            font-style: italic;
+        }
+
+        .sidebar p {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .sidebar-nav {
+            margin-top: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 1.1em;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            border: 1px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transform: translateY(-2px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .sidebar .socials {
+            margin-top: auto;
+            margin-bottom: 60px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .sidebar .socials a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .sidebar .socials a:hover {
+            opacity: 1;
+            color: var(--accent-gold);
+        }
+
+        .bottom-text {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- 主要內容 (可捲動) --- */
+        .main {
+            margin-left: 260px;
+            padding: 50px 60px;
+            width: calc(100% - 260px);
+            box-sizing: border-box;
+        }
+
+        section {
+            display: block;
+            background-color: var(--card-bg);
+            padding: 40px;
+            margin-bottom: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(149, 125, 173, 0.1); 
+            border: 1px solid rgba(224, 195, 140, 0.3);
+            scroll-margin-top: 50px; 
+        }
+
+        h3 {
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: var(--sidebar-bg); 
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            font-size: 1.1em;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-left: 20px;
+        }
+
+        ul li {
+            list-style-type: square;
+            color: var(--sidebar-bg); 
+        }
+        
+        ul li span {
+            color: var(--text-main);
+        }
+
+        a {
+            color: var(--sidebar-bg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        
+        a:hover {
+            color: #7e57c2; 
+            text-decoration: underline;
+        }
+
+        /* --- 照片與容器樣式 --- */
+        .concert-text {
+            font-size: 1.0em;
+            color: #777;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin: 10px 0;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-gallery {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .photo-item {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- 技能條樣式 --- */
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            color: var(--sidebar-bg);
+        }
+
+        .skill-value {
+            font-weight: bold;
+            color: #bcaaa4;
+        }
+
+        .skill-bar {
+            background-color: #f3eff5; 
+            border-radius: 20px;
+            overflow: hidden;
+            height: 12px;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background-color: var(--sidebar-bg); 
+            width: 0%;
+            border-radius: 20px;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        /* 手機版響應式 */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 30px;
+            }
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <img src="images/IMG_5884.jpg" alt="樂琦大頭照">
+        <h1>施樂琦</h1>
+        
+        <p>
+        I'm a <span class="typed"></span>
+        </p>
+
+        <nav class="sidebar-nav">
+            <a href="#resume">RESUME</a>
+            <a href="#skills">SKILLS</a>
+            <a href="#concert">CONCERT</a>
+            <a href="#travel">TRAVEL</a>
+        </nav>
+
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+        <script>
+        var typed = new Typed('.typed', {
+            strings: ["Student.", "PM Dreamer.", "Musician.", "Traveler.", "Webtoon Lover."],
+            typeSpeed: 70,
+            backSpeed: 70,
+            loop: true,
+            backDelay: 5000 
+        });
+        </script>
+
+        <div class="socials">
+            <a href="https://www.instagram.com/li_chi.21/" target="_blank">Instagram</a>
+            <a href="https://www.dcard.tw/@lichi21" target="_blank">Dcard</a>
+        </div>
+
+        <div class="bottom-text">
+            © <span id="year">2025</span> copyright by Lechi.S
+        </div>
+    </div>
+
+    <div class="main">
+        
+        <section id="resume">
+            <h3>RESUME | 簡介</h3>
+            <ul>
+                <li><span>Education: Technology application and Human resource Dep. & Business Administration Dep. NTNU</span></li>
+                <li><span>Language: CHN | ENG | KOR</span></li>
+                <li><span>A Content PM Learner</span></li>
+                <li><span>A Coding Learner</span></li>
+            </ul>
+        </section>
+
+        <section id="skills">
+            <h3>SKILL | 技能</h3>
+
+            <div class="skill">
+                <div class="skill-header">
+                    <span class="skill-name">English</span>
+                    <span class="skill-value">80%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" data-width="80%"></div>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-header">
+                    <span class="skill-name">Korean</span>
+                    <span class="skill-value">70%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" data-width="70%"></div>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-header">
+                    <span class="skill-name">Flute</span>
+                    <span class="skill-value">85%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" data-width="85%"></div>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-header">
+                    <span class="skill-name">Business-related</span>
+                    <span class="skill-value">70%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill" data-width="70%"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="concert">
+            <h3>CONCERT | 音樂會紀錄</h3>
+            <ul>
+                <li><span>2025-07-16 | 回響二十 · 樂聲不息</span></li>
+                <div class="image-container">
+                    <img src="images/2O5A3675.JPEG" alt="0716音樂會照">
+                </div>
+                <p class="concert-text">這次很榮幸可以進到臺中國家歌劇院大劇院進行表演❤</p>
+                <a href="https://youtu.be/FUvJJQ78s8U?si=d3J7-qSuSVC9VY5y&t=150" target="_blank">‧ Welcome to the Imagination world</a>
+                <a href="https://youtu.be/PV-SuClYtxg?si=MHml0iAmS5pvac0o" target="_blank">‧ Rhapsody for Alto Saxophone</a>
+                <a href="https://youtu.be/wECkfGFg3CA?si=ulF-EZchJNcTDGd9&t=165" target="_blank">‧ Sinfonietta No.3 "Distance of Sounds"</a>
+                <a href="https://youtu.be/Jd2RVlWTkJw?si=WgpVmZHcZwF9GlLs&t=30" target="_blank">‧ With Heart and Voice</a>
+            </ul>
+
+            <br>
+
+            <ul>
+                <li><span>2025-07-26 | 樂 · 遇</span></li>
+                <div class="image-container">
+                    <img src="images/DSC02770.JPEG" alt="0726音樂會照">
+                </div>
+                <p class="concert-text">被高中學弟妹們邀請回去演出，順便和以前的朋友們聚一聚！</p>
+            </ul>
+
+            <br>
+
+            <ul>
+                <li><span>2025-08-24 | 音峋</span></li>
+                <div class="image-container">
+                    <img src="images/DSC14596.JPEG" alt="0824音樂會照">
+                </div>
+                <p class="concert-text">和高中校友團一起演出，還吹了【給莫道克的最後一封信】的Solo!</p>
+                <a href="https://youtu.be/MPk9i2lkxIA?si=Dw2CsX33exDUWvOh&t=285" target="_blank">‧ マードックからの最後の手紙</a>
+            </ul>
+        </section>
+
+        <section id="travel">
+            <h3>TRAVEL | 旅行紀錄</h3>
+            <ul>
+                <li><span>2025/01 Bankok & Pattaya</span></li>
+                <div class="image-container">
+                    <img src="images/IMG_1765.jpg" alt="真理寺">
+                </div>
+                <p class="concert-text">推薦大家要來泰國、、、這次去了十天含機酒只花兩萬元，超級划算！</p>
+                
+                <h4 style="margin:20px 0 10px; color:var(--sidebar-bg);">Bangkok</h4>
+                <div class="photo-gallery">
+                    <div class="photo-item">
+                        <img src="images/IMG_1684.jpg" alt="食物照">
+                        <p class="concert-text">鱷魚肉超級好吃༼☯﹏☯༽</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/IMG_1733.jpg" alt="食物照2">
+                        <p class="concert-text">來泰國必吃蟲蟲ψ(｀∇´)ψ</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/IMG_2023.jpg" alt="食物照3">
+                        <p class="concert-text">猜猜這個在百貨公司裡賣的麵多少錢？</p>
+                    </div>
+                </div>
+
+                <h4 style="margin:20px 0 10px; color:var(--sidebar-bg);">Pattaya</h4>
+                <div class="photo-gallery">
+                    <div class="photo-item">
+                        <img src="images/IMG_1831.jpg" alt="食物照4">
+                        <p class="concert-text">在海邊看著夕陽吃飯完全是幸福</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/IMG_1985.jpg" alt="景物照1">
+                        <p class="concert-text">個人覺得還行，下次看更刺激的</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/IMG_2007.jpg" alt="食物照5">
+                        <p class="concert-text">在海邊喝咖啡也是很Chill了</p>
+                    </div>
+                </div>
+            </ul>
+
+            <br><hr style="border:0; border-top:1px dashed var(--accent-gold); margin:30px 0;"><br>
+
+            <ul>
+                <li><span>2025/02 Seoul</span></li>
+                <div class="image-container">
+                    <img src="images/IMG_4533.jpg" alt="KBS Arena">
+                </div>
+                <p class="concert-text">追星女獨自前往韓國的紀錄！</p>
+                <div class="image-container">
+                    <img src="images/IMG_4606.jpg" alt="UTY">
+                </div>
+                <p class="concert-text">媽呀好近！！完全是幸福的...❤❤❤</p>
+                <div class="photo-gallery">
+                    <div class="photo-item">
+                        <img src="images/IMG_4515.jpg" alt="食物照6">
+                        <p class="concert-text">沒有人可以拒絕薄巧</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/IMG_4363.jpg" alt="朋友照1">
+                        <p class="concert-text">和韓國朋友一起拍貼❤</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/IMG_0167.jpg" alt="朋友照2">
+                        <p class="concert-text">漢江公園野餐也是心願之一❤</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/IMG_4735.jpg" alt="朋友照3">
+                        <p class="concert-text">一起去K-beauty Festival❤</p>
+                    </div>
+                </div>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const skillSection = document.querySelector('#skills');
+            const progressBars = document.querySelectorAll('.skill-bar-fill');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        progressBars.forEach(bar => {
+                            const width = bar.getAttribute('data-width');
+                            bar.style.width = width;
+                        });
+                        observer.unobserve(skillSection); 
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(skillSection);
+        });
+    </script>
+
+</body>
+</html>
